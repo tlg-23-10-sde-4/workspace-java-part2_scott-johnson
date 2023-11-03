@@ -32,13 +32,13 @@ public class TelevisionTestSort {
             System.out.println(tv);
         }
         System.out.println();
-    
+
 
         tvList.sort(new TelevisionChannelComparator());
 
         System.out.println("Sorted by channel");
         for (Television tv : tvList) {
-          System.out.println(tv);
+            System.out.println(tv);
         }
         System.out.println();
 
