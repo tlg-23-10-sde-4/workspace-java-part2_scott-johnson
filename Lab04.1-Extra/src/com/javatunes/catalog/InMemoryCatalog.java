@@ -85,8 +85,6 @@ public class InMemoryCatalog implements Catalog {
         for (MusicItem item : catalogData) {
             if (item.getMusicCategory().equals(category)) {
                 result.add(item);
-
-
             }
         }
         return result;
@@ -113,7 +111,6 @@ public class InMemoryCatalog implements Catalog {
         for (MusicItem item : catalogData) {
             if (item.getTitle().equals(item.getArtist())) {
                 result.add(item);
-
             }
         }
         return result;
@@ -138,7 +135,7 @@ public class InMemoryCatalog implements Catalog {
      * TASK: how many items of the specified genre (MusicCategory) do we sell?
      */
     public int numberInGenre(MusicCategory category) {
-        return 0;
+        return findByCategory(category).size();
 
 
     }
