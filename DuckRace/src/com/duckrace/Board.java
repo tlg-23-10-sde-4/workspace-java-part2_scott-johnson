@@ -38,9 +38,14 @@ import java.util.*;
  *   17       17    Dom        1    DEBIT_CARD
  */
 
-class Board {
+ public class Board {
     private final Map<Integer, String> studentIdMap = loadStudentIdMap();
     private final Map<Integer, DuckRacer> racerMap = new TreeMap<>();
+
+    public int maxId() {
+        // fix where this is. this is to not hard code the 19 in duck racer app
+        return studentIdMap.size();
+    }
 
     /*
      * Updates board (racerMap) by making a DuckRacer 'win'
@@ -83,15 +88,8 @@ class Board {
             //System.out.println(racer);
             System.out.printf("%s    %s     %s    %s\n",
                     racer.getId(), racer.getName(), racer.getWins(), racer.getRewards());
-
         }
     }
-
-    // TESTING PURPOSES ONLY
-    void dumpStudentIdMap() {
-        System.out.println(studentIdMap);
-    }
-
 
     private Map<Integer, String> loadStudentIdMap() {
         Map<Integer, String> idMap = new HashMap<>();

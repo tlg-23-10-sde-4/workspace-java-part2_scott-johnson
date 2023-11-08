@@ -2,7 +2,7 @@ package com.duckrace;
 
 import static com.duckrace.Reward.*;
 
-class BoardTest {
+ class BoardTest {
     public static void main(String[] args) {
         Board board = new Board();
         //board.dumpStudentIdMap();
