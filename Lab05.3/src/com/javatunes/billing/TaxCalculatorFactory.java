@@ -1,10 +1,16 @@
 package com.javatunes.billing;
 
+import java.util.Map;
+
 public class TaxCalculatorFactory {
 
     // prevent instantiation from outside, this is an all-static class
 
-
+    private static final Map<Location, TaxCalculator> calcMap = Map.of(
+            Location.ONLINE, new OnlineTax(),
+            Location.USA, new USATax(),
+            Location.EUROPE, new EuropeTax()
+    );
     private TaxCalculatorFactory() {
     }
 
@@ -22,18 +28,18 @@ public class TaxCalculatorFactory {
      */
     public static TaxCalculator getTaxCalculator(Location location) {
         TaxCalculator calc = null;
-
-        switch (location) {
-            case ONLINE:
-                calc = new OnlineTax();
-                break;
-            case USA:
-                calc = new USATax();
-                break;
-            case EUROPE:
-                calc = new EuropeTax();
-                break;
-        }
+//
+////        switch (location) {
+////            case ONLINE:
+//                calc = new OnlineTax();
+//                break;
+//            case USA:
+//                calc = new USATax();
+//                break;
+//            case EUROPE:
+//                calc = new EuropeTax();
+//                break;
+//        }
 
         return calc;
     }
