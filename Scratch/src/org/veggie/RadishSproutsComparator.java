@@ -6,8 +6,8 @@ import java.util.Comparator;
 class RadishSproutsComparator implements Comparator<Radish> {
 
     @Override
-    public int compare(Radish radish1, Radish radish2) {
-        return Integer.compare(radish1.getSprouts(), radish2.getSprouts());
+    public int compare(Radish r1, Radish r2) {
+        return Integer.compare(r1.getSprouts(), r2.getSprouts());
 
     }
 }
