@@ -1,6 +1,6 @@
 package com.duckrace;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -38,11 +38,40 @@ import java.util.*;
  *   17       17    Dom        1    DEBIT_CARD
  */
 
- public class Board {
+ public class Board implements Serializable {
+     private static final String dataFilePath = "data/board.dat";
+     private static final String studentIdFilePath = "conf/student-ids.csv";
+     /*
+      * If data/board.dat exists, read that file into a Board object and return it.
+      * Otherwise, return a new board.
+      * we will use Javas built in object serialization feature.
+      */
+     public static Board getInstance() {
+         Board board = null;
+         if (Files.exists(Path.of(dataFilePath))) {
+             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(dataFilePath))) {
+                 board = (Board) in.readObject();
+             }
+             catch (Exception e) {
+                 e.printStackTrace();
+             }
+         }
+         else {
+             board = new Board();
+         }
+         return board;
+     }
+
     private final Map<Integer, String> studentIdMap = loadStudentIdMap();
     private final Map<Integer, DuckRacer> racerMap = new TreeMap<>();
 
-    public int maxId() {
+    // prevent instantiation from outside.
+     private Board() {
+
+    }
+
+
+     public int maxId() {
         // fix where this is. this is to not hard code the 19 in duck racer app
         return studentIdMap.size();
     }
@@ -68,7 +97,22 @@ import java.util.*;
 
         }
         racer.win(reward);
+        save();
     }
+
+    /*
+     *Writes *this* Board Object to binary filed data/board.dat
+     * uses built in Java object serialization facility.
+     */
+     private void save() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(dataFilePath))) {
+            out.writeObject(this);
+        }
+        catch (Exception e) {
+
+        }
+     }
+
      /*
       * TODO: render the data to show it like you see it every day
       *  "Duck Race Results"
@@ -98,7 +142,7 @@ import java.util.*;
 
         try {
             // read all lines from conf/student-ids.csv into a List<String>
-            List<String> lines = Files.readAllLines(Path.of("conf/student-ids.csv"));
+            List<String> lines = Files.readAllLines(Path.of(studentIdFilePath));
 
             for (String line : lines) {
                 String[] tokens = line.split(","); // tokens[0] is '1' and tokens[1] is 'Aaron'

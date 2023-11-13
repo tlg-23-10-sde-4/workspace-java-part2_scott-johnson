@@ -11,7 +11,7 @@ import com.duckrace.Reward;
 import java.util.Scanner;
 
 public class DuckRacerApp {
-    private Board board = new Board();
+    private final Board board = Board.getInstance();
     private final Scanner scanner = new Scanner(System.in);
 
     public void execute() {
@@ -60,9 +60,7 @@ public class DuckRacerApp {
                 id = Integer.parseInt(input);
                 if (1 <= id && id <= 19) {  // TODO dont hard code the 19
                     validInput = true;
-
                 }
-
             }
         }
 
