@@ -13,7 +13,7 @@ import com.fastjava.annotation.Fast;
 /**
  * TODO: all methods in this class should run 25% faster.
  */
-//@Fast(boost=0.25)
+@Fast(boost=0.25)
 public class Employee {
 
     /**
